@@ -1,0 +1,36 @@
+<?php
+
+namespace :NAMESPACE:\:MODULE:\Setup\Migrations;
+
+use IrishTitan\Handshake\Contracts\MigrationContract;
+use IrishTitan\Handshake\Core\Migration;
+use IrishTitan\Handshake\Core\Schema;
+
+class :MIGRATION: extends Migration implements MigrationContract
+{
+
+    /**
+     * Run the migration.
+     *
+     */
+    public function up()
+    {
+        Schema::create('YourTableName', function ($table) {
+            $table->increments('id');
+
+            // your migration code
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migration.
+     *
+     */
+    public function down()
+    {
+        Schema::drop('YourTableName');
+    }
+
+}

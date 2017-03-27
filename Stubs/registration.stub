@@ -1,0 +1,5 @@
+<?php
+
+use IrishTitan\Handshake\Core\Module;
+
+Module::register(':NAMESPACE:_:MODULE:', __DIR__);

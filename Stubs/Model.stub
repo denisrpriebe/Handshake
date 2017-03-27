@@ -1,0 +1,10 @@
+<?php
+
+namespace :NAMESPACE:\:MODULE:\Models;
+
+use IrishTitan\Handshake\Core\Model;
+
+class :MODEL: extends Model
+{
+
+}

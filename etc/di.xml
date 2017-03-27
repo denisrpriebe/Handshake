@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+
+                <item name="irishtitan_handshake_command_makemodulecommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeModuleCommand</item>
+
+                <item name="irishtitan_handshake_command_makemodelcommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeModelCommand</item>
+
+                <item name="irishtitan_handshake_command_makemigrationcommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeMigrationCommand</item>
+
+                <item name="irishtitan_handshake_command_clearcommand" xsi:type="object">IrishTitan\Handshake\Commands\ClearCommand</item>
+
+                <item name="irishtitan_handshake_command_migratecommand" xsi:type="object">IrishTitan\Handshake\Commands\MigrateCommand</item>
+
+                <item name="irishtitan_handshake_command_rollbackcommand" xsi:type="object">IrishTitan\Handshake\Commands\rollbackCommand</item>
+
+                <item name="irishtitan_handshake_command_seedcommand" xsi:type="object">IrishTitan\Handshake\Commands\SeedCommand</item>
+
+            </argument>
+        </arguments>
+    </type>
+</config>
