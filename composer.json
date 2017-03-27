@@ -6,7 +6,6 @@
     "magento"
   ],
   "type": "magento2-module",
-  "version": "1.1.0",
   "require": {
     "php": ">=7.0",
     "illuminate/database": "^5.4",
