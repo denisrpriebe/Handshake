@@ -10,6 +10,8 @@
 
                 <item name="irishtitan_handshake_command_makemodelcommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeModelCommand</item>
 
+                <item name="irishtitan_handshake_command_makeseedercommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeSeederCommand</item>
+
                 <item name="irishtitan_handshake_command_makemigrationcommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeMigrationCommand</item>
 
                 <item name="irishtitan_handshake_command_clearcommand" xsi:type="object">IrishTitan\Handshake\Commands\ClearCommand</item>

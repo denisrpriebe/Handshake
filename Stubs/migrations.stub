@@ -1,5 +1,16 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Module Migrations
+|--------------------------------------------------------------------------
+|
+| Here is where you can register the migrations that your module needs
+| to run. Simply add the migrations with its qualifying namespace in the
+| "::class" format.
+|
+*/
+
 return [
 
     // migrations go here

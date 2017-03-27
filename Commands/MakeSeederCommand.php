@@ -5,7 +5,7 @@ namespace IrishTitan\Handshake\Commands;
 use IrishTitan\Handshake\Core\Command;
 use SebastiaanLuca\StubGenerator\StubGenerator;
 
-class MakeModelCommand extends Command
+class MakeSeederCommand extends Command
 {
 
     /**
@@ -13,14 +13,14 @@ class MakeModelCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'handshake:make:model';
+    protected $signature = 'handshake:make:seeder';
 
     /**
      * The command description.
      *
      * @var string
      */
-    protected $description = 'Make a new Handshake model.';
+    protected $description = 'Make a new Handshake seeder.';
 
     /**
      * The arguments the command accepts.
@@ -39,9 +39,9 @@ class MakeModelCommand extends Command
             'description' => 'The name of the module.'
         ],
 
-        'model' => [
+        'seeder' => [
             'mode' => 'required',
-            'description' => 'The model to generate.'
+            'description' => 'The seeder name.'
         ]
 
     ];
@@ -55,20 +55,20 @@ class MakeModelCommand extends Command
     {
         $namespace = $this->input->getArgument('namespace');
         $module = $this->input->getArgument('module');
-        $model = $this->input->getArgument('model');
+        $seeder = $this->input->getArgument('seeder');
 
         $stub = new StubGenerator(
-            __DIR__ . '/../Stubs/Model.stub',
-            'app/code/' . $namespace . '/' . $module . '/Models/' . $model . '.php'
+            __DIR__ . '/../Stubs/Seeder.stub',
+            'app/code/' . $namespace . '/' . $module . '/Setup/Seeds/' . $seeder . '.php'
         );
 
         $stub->render([
-            ':MODULE:' => $module,
             ':NAMESPACE:' => $namespace,
-            ':MODEL:' => $model
+            ':MODULE:' => $module,
+            ':SEEDER:' => $seeder
         ]);
 
-        $this->output->writeln('<info>' . $model . ' model generated successfully.</info>');
+        $this->output->writeln('<info>' . $seeder . ' seeder created successfully.</info>');
     }
 
 }

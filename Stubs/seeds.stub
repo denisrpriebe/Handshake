@@ -1,5 +1,16 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Module Seeders
+|--------------------------------------------------------------------------
+|
+| Here is where you can register the seeders that your module needs
+| to run. Simply add the seeder with its qualifying namespace in the
+| "::class" format.
+|
+*/
+
 return [
 
     // seeds go here
