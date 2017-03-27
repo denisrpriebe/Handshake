@@ -31,7 +31,7 @@ class MigrateCommand extends Command
     {
         $this->output->writeln('Running migrations...');
 
-        $migrations = include __DIR__ . '/../config/migrations.php';
+        $migrations = include 'app/handshake/migrations.php';
 
         foreach ($migrations as $migration) {
 

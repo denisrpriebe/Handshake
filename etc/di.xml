@@ -4,6 +4,8 @@
         <arguments>
             <argument name="commands" xsi:type="array">
 
+                <item name="irishtitan_handshake_command_installcommand" xsi:type="object">IrishTitan\Handshake\Commands\InstallCommand</item>
+
                 <item name="irishtitan_handshake_command_makemodulecommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeModuleCommand</item>
 
                 <item name="irishtitan_handshake_command_makemodelcommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeModelCommand</item>

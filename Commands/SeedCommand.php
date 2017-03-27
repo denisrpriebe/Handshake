@@ -29,7 +29,7 @@ class SeedCommand extends Command
     {
         $this->output->writeln('Seeding the database...');
 
-        $seeders = include __DIR__ . '/../config/seeds.php';
+        $seeders = include 'app/handshake/seeds.php';
 
         foreach ($seeders as $seeder) {
             $seeder::seed();
