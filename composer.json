@@ -1,22 +1,19 @@
 {
   "name": "irishtitan/handshake",
-  "description": "Let's get along, Magento.",
+  "description": "Make the Magento 2 development process easier.",
+  "license": "MIT",
+  "keywords": [
+    "magento"
+  ],
   "require": {
-    "php": "~5.6.5|7.0.2|7.0.4|~7.0.6",
+    "php": ">=7.0",
     "illuminate/database": "^5.4",
     "sebastiaanluca/php-stub-generator": "^0.1.1"
   },
-  "type": "magento2-module",
-  "version": "1.0.0",
-  "license": [
-    "MIT"
-  ],
   "autoload": {
-    "files": [
-      "registration.php"
-    ],
     "psr-4": {
       "IrishTitan\\Handshake\\": ""
     }
-  }
+  },
+  "minimum-stability": "dev"
 }
