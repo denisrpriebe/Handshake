@@ -13,7 +13,8 @@
   },
   "autoload": {
     "files": [
-      "registration.php"
+      "registration.php",
+      "helpers.php"
     ],
     "psr-4": {
       "IrishTitan\\Handshake\\": ""
