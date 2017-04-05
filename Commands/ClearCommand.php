@@ -20,7 +20,7 @@ class ClearCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Clear the Magento 2 cache and generation directories.';
+    protected $description = 'Clear the Magento 2 cache, generation and di directories.';
 
     /**
      * Perform the command.
@@ -30,11 +30,13 @@ class ClearCommand extends Command
     {
         Directory::remove('var/cache');
         Directory::remove('var/generation');
+        Directory::remove('var/di');
 
         Directory::make('var/cache');
         Directory::make('var/generation');
+        Directory::make('var/di');
 
-        $this->output->writeln('Magento 2 cache and generation cleared.');
+        $this->output->writeln('Magento 2 cache, generation and di cleared.');
     }
 
 }

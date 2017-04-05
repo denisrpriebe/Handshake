@@ -2,6 +2,7 @@
 
 namespace :NAMESPACE:\:MODULE:\Setup\Migrations;
 
+use Illuminate\Database\Schema\Blueprint;
 use IrishTitan\Handshake\Contracts\MigrationContract;
 use IrishTitan\Handshake\Core\Migration;
 use IrishTitan\Handshake\Core\Schema;
@@ -15,7 +16,7 @@ class :MIGRATION: extends Migration implements MigrationContract
      */
     public function up()
     {
-        Schema::create('YourTableName', function ($table) {
+        Schema::create('YourTableName', function (Blueprint $table) {
             $table->increments('id');
 
             // your migration code

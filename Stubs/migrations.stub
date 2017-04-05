@@ -5,7 +5,7 @@
 | Module Migrations
 |--------------------------------------------------------------------------
 |
-| Here is where you can register the migrations that your module needs
+| Here is where you can register the migrations that your modules need
 | to run. Simply add the migrations with its qualifying namespace in the
 | "::class" format.
 |

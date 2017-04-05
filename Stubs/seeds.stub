@@ -5,7 +5,7 @@
 | Module Seeders
 |--------------------------------------------------------------------------
 |
-| Here is where you can register the seeders that your module needs
+| Here is where you can register the seeders that your modules need
 | to run. Simply add the seeder with its qualifying namespace in the
 | "::class" format.
 |

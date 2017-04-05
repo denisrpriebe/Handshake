@@ -2,6 +2,7 @@
 
 namespace IrishTitan\Handshake\Setup\Migrations;
 
+use Illuminate\Database\Schema\Blueprint;
 use IrishTitan\Handshake\Contracts\MigrationContract;
 use IrishTitan\Handshake\Core\Migration;
 use IrishTitan\Handshake\Core\Schema;
@@ -15,7 +16,7 @@ class CreateAnimalsTable extends Migration implements MigrationContract
      */
     public function up()
     {
-        Schema::create('animals', function ($table) {
+        Schema::create('animals', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
