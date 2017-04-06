@@ -16,6 +16,7 @@ After composer pulls in Handshake, you need to enable Handshake:
     
 Finish the installation by running:
 
+    php bin/magento setup:upgrade
     php bin/magento handshake:install
     
 If everything went smoothly, you are now ready to begin developing Magento 2 modules with Handshake.
