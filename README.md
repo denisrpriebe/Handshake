@@ -29,7 +29,7 @@ To see a list of Handshake commands run:
     
 Scroll through the list until you see the Handshake section.
 
-#### Creating a New Module
+### Creating a New Module
 
 To create a new Magento 2 module, you can use the `handshake:make:module` command:
 
@@ -39,7 +39,26 @@ The `handshake:make:module` command accepts two arguments. `Namespace` is your v
 
 For example, `php bin/magento handshake:make:module Acme Forum`.
 
-#### Migrations
+### Migrations
+
+Once you have installed Handshake, a new directory will be created: `app/handshake`. This is where you may register your migrations and seeds. After creating a migration add it to `migrations.php`.
+ 
+ To create a new migration, you can use the `handshake:make:migration` command:
+ 
+    php bin/magento handshake:make:migration Namespace Module Migration
+    
+ The `handshake:make:migration` command accepts three arguments. `Namespace` is your vendor name, `Module` is the name of your module and `Migration` is the name of your migration.
+ 
+ For example, `php bin/magento handshake:make:migration Acme Forum CreatePostsTable`
+ 
+ All migrations are stored within the setup folder of your corresponding module.
+ Once you have created your migration, you should register it within `app/handshake/migrations.php`.
+ 
+ #### Running Your Migrations
+ 
+ You can run your migrations with the `handshake:migrate` command.
+ 
+ You can rollback your migrations with the `handshake:migrate:rollback` command.
 
 ## License
 

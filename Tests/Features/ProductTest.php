@@ -29,7 +29,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function a_product_can_be_created_and_deleted()
+    public function it_can_be_created_and_deleted()
     {
         $product = $this->product->create([
             'sku' => 'SKU0001',
@@ -45,6 +45,20 @@ class ProductTest extends TestCase
 
         $this->expectException(ProductNotFoundException::class);
         $this->product->findOrFail($product->id);
+    }
+
+    /** @test */
+    public function it_can_add_an_image()
+    {
+        $product = $this->product->create([
+            'sku' => 'SKU0001',
+            'name' => 'Example Product',
+            'weight' => 25,
+            'price' => 100,
+            'qty' => 5
+        ]);
+
+        $product->addImage('../../pub/media/landscape.jpg');
     }
 
 

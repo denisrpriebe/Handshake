@@ -184,6 +184,21 @@ class Product
     }
 
     /**
+     * Add an image to the product.
+     *
+     * @param $image
+     */
+    public function addImage($image)
+    {
+        $this->product->addImageToMediaGallery($image,
+            ['image', 'small_image', 'thumbnail'], false, false);
+
+        $this->product->save();
+
+
+    }
+
+    /**
      * Create a new product.
      *
      * @param $attributes
