@@ -2,41 +2,17 @@
 
 namespace IrishTitan\Handshake\Facades;
 
-use IrishTitan\Handshake\Contracts\FacadeContract;
-use IrishTitan\Handshake\Core\App;
 use IrishTitan\Handshake\Core\Auth as AuthCore;
+use IrishTitan\Handshake\Core\Facade;
 
-class Auth implements FacadeContract
+class Auth extends Facade
 {
 
     /**
-     * Check if we have an authenticated user.
+     * The class this facade represents.
      *
-     * @return bool
+     * @var string
      */
-    public static function check()
-    {
-        return static::core()->check();
-    }
-
-    /**
-     * Get the authenticated user.
-     *
-     * @return bool|\Magento\Customer\Model\Customer
-     */
-    public static function user()
-    {
-        return static::core()->user();
-    }
-
-    /**
-     * Get the auth class instance.
-     *
-     * @return AuthCore
-     */
-    public static function core(): AuthCore
-    {
-        return App::make(AuthCore::class);
-    }
+    protected $class = AuthCore::class;
 
 }

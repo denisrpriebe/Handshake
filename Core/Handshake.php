@@ -3,6 +3,7 @@
 namespace IrishTitan\Handshake\Core;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use IrishTitan\Handshake\Facades\Directory;
 
 class Handshake
 {
@@ -30,6 +31,7 @@ class Handshake
     /**
      * Start handshake and its services.
      *
+     * @return void
      */
     public static function start()
     {
@@ -45,16 +47,18 @@ class Handshake
      */
     private function config()
     {
-        return include 'app/etc/env.php';
+        return include Directory::app() . '/etc/env.php';
     }
 
     /**
      * Load Magento's configuration into Handshake.
      *
+     * @return void
      */
     private function setConfig()
     {
         $config = $this->config();
+
         $this->config['database'] = $config['db']['connection']['default']['dbname'];
         $this->config['username'] = $config['db']['connection']['default']['username'];
         $this->config['password'] = $config['db']['connection']['default']['password'];
@@ -63,6 +67,7 @@ class Handshake
     /**
      * Boot up Laravel's Eloquent.
      *
+     * @return void
      */
     private function bootEloquent()
     {

@@ -3,9 +3,9 @@
 namespace IrishTitan\Handshake\Facades;
 
 use IrishTitan\Handshake\Core\Facade;
-use IrishTitan\Handshake\Core\Session as SessionCore;
+use IrishTitan\Handshake\Core\Product as ProductCore;
 
-class Session extends Facade
+class Product extends Facade
 {
 
     /**
@@ -13,6 +13,6 @@ class Session extends Facade
      *
      * @var string
      */
-    protected $class = SessionCore::class;
+    protected $class = ProductCore::class;
 
 }

@@ -2,10 +2,10 @@
 
 namespace IrishTitan\Handshake\Facades;
 
+use IrishTitan\Handshake\Core\Category as CategoryCore;
 use IrishTitan\Handshake\Core\Facade;
-use IrishTitan\Handshake\Core\Session as SessionCore;
 
-class Session extends Facade
+class Category extends Facade
 {
 
     /**
@@ -13,6 +13,6 @@ class Session extends Facade
      *
      * @var string
      */
-    protected $class = SessionCore::class;
+    protected $class = CategoryCore::class;
 
 }

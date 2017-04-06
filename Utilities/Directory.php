@@ -2,15 +2,34 @@
 
 namespace IrishTitan\Handshake\Utilities;
 
+use Magento\Framework\App\Filesystem\DirectoryList;
+
 class Directory
 {
+
+    /**
+     * The directory list instance.
+     *
+     * @var mixed
+     */
+    protected $directoryList;
+
+    /**
+     * Directory constructor.
+     *
+     * @param DirectoryList $directoryList
+     */
+    public function __construct(DirectoryList $directoryList)
+    {
+        $this->directoryList = $directoryList;
+    }
 
     /**
      * Deletes the given directory and everything in it.
      *
      * @param $dir
      */
-    public static function remove($dir)
+    public function remove($dir)
     {
         if (is_dir($dir)) {
             $objects = scandir($dir);
@@ -33,11 +52,21 @@ class Directory
      *
      * @param $dir
      */
-    public static function make($dir)
+    public function make($dir)
     {
         if (!file_exists($dir)) {
             mkdir($dir);
         }
+    }
+
+    /**
+     * Get the path to the app directory.
+     *
+     * @return mixed
+     */
+    public function app()
+    {
+        return $this->directoryList->getPath('app');
     }
 
 }
