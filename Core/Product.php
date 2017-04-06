@@ -42,6 +42,8 @@ class Product
 
     public function __construct(ProductFactory $factory, ProductRepository $repository, CollectionFactory $collection)
     {
+        Handshake::start();
+
         $this->factory = $factory;
         $this->repository = $repository;
         $this->collection = $collection;
@@ -55,6 +57,10 @@ class Product
      */
     public function __get($name)
     {
+        if ($name === 'id') {
+            return $this->product->getData('entity_id');
+        }
+
         return $this->product->getData($name);
     }
 
@@ -162,9 +168,49 @@ class Product
      */
     public function save()
     {
-        $this->repository->save($this->product);
+        $this->product = $this->repository->save($this->product);
 
         return $this;
+    }
+
+    /**
+     * Delete the given product.
+     *
+     * @return void
+     */
+    public function delete()
+    {
+        $this->repository->delete($this->product);
+    }
+
+    /**
+     * Create a new product.
+     *
+     * @param $attributes
+     * @return $this
+     */
+    public function create($attributes)
+    {
+        $this->product = $this->factory->create();
+
+        $this->product->setSku($attributes['sku']);
+        $this->product->setName($attributes['name']);
+        $this->product->setAttributeSetId(isset($attributes['attributeSetId']) ?: 4);
+        $this->product->setStatus(isset($attributes['status']) ?: 1);
+        $this->product->setWeight($attributes['weight']);
+        $this->product->setVisibility(isset($attributes['visibility']) ?: 4);
+        $this->product->setTaxClassId(isset($attributes['taxClassId']) ?: 0);
+        $this->product->setTypeId(isset($attributes['typeId']) ?: 'simple');
+        $this->product->setPrice($attributes['price']);
+        $this->product->setDescription(isset($attributes['description']) ?: 'description');
+        $this->product->setStockData([
+            'use_config_manage_stock' => 0,
+            'manage_stock' => 1,
+            'is_in_stock' => isset($attributes['inStock']) ?: 1,
+            'qty' => $attributes['qty']
+        ]);
+
+        return $this->save();
     }
 
 }

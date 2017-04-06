@@ -9,6 +9,16 @@ class Handshake
 {
 
     /**
+     * Handshake constructor.
+     *
+     * @param Registry $registry
+     */
+    public function __construct(Registry $registry)
+    {
+        $registry->secure();
+    }
+
+    /**
      * The database configuration.
      *
      * @var array
@@ -35,7 +45,8 @@ class Handshake
      */
     public static function start()
     {
-        $handshake = new static;
+        $handshake = App::make(static::class);
+
         $handshake->setConfig();
         $handshake->bootEloquent();
     }

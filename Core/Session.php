@@ -67,7 +67,7 @@ class Session
      */
     public function has($key)
     {
-        return $this->instance->get($key, false) ? true : false;
+        return $this->get($key) ? true : false;
     }
 
     /**
