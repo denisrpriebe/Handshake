@@ -187,6 +187,7 @@ class Product
      * Add an image to the product.
      *
      * @param $image
+     * @return $this
      */
     public function addImage($image)
     {
@@ -195,24 +196,34 @@ class Product
 
         $this->product->save();
 
+        return $this;
+    }
 
+    /**
+     * Get the product's images.
+     *
+     * @return mixed
+     */
+    public function images()
+    {
+        return $this->product->getMediaGallery('images');
     }
 
     /**
      * Create a new product.
      *
-     * @param $attributes
-     * @return $this
+     * @param array $attributes
+     * @return Product
      */
-    public function create($attributes)
+    public function create(array $attributes)
     {
         $this->product = $this->factory->create();
 
-        $this->product->setSku($attributes['sku']);
+        $this->product->setSku($attributes['sku'] ?: uniqid());
         $this->product->setName($attributes['name']);
         $this->product->setAttributeSetId(isset($attributes['attributeSetId']) ?: 4);
         $this->product->setStatus(isset($attributes['status']) ?: 1);
-        $this->product->setWeight($attributes['weight']);
+        $this->product->setWeight($attributes['weight'] ?: 1);
         $this->product->setVisibility(isset($attributes['visibility']) ?: 4);
         $this->product->setTaxClassId(isset($attributes['taxClassId']) ?: 0);
         $this->product->setTypeId(isset($attributes['typeId']) ?: 'simple');
@@ -222,7 +233,7 @@ class Product
             'use_config_manage_stock' => 0,
             'manage_stock' => 1,
             'is_in_stock' => isset($attributes['inStock']) ?: 1,
-            'qty' => $attributes['qty']
+            'qty' => $attributes['qty'] ?: 10
         ]);
 
         return $this->save();

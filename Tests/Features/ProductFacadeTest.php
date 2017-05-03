@@ -2,20 +2,12 @@
 
 namespace IrishTitan\Handshake\Tests\Features;
 
-use IrishTitan\Handshake\Core\App;
-use IrishTitan\Handshake\Core\Product;
 use IrishTitan\Handshake\Exceptions\ProductNotFoundException;
+use IrishTitan\Handshake\Facades\Product;
 use IrishTitan\Handshake\Tests\TestCase;
 
-class ProductTest extends TestCase
+class ProductFacadeTest extends TestCase
 {
-
-    /**
-     * The product instance.
-     *
-     * @var
-     */
-    protected $product;
 
     /**
      * Get our class ready for testing.
@@ -24,14 +16,12 @@ class ProductTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-
-        $this->product = App::make(Product::class);
     }
 
     /** @test */
     public function a_product_can_be_created_and_deleted()
     {
-        $product = $this->product->create([
+        $product = Product::create([
             'sku' => 'SKU0001',
             'name' => 'Example Product',
             'weight' => 25,
@@ -39,18 +29,18 @@ class ProductTest extends TestCase
             'qty' => 5
         ]);
 
-        $this->product->findOrFail($product->id);
+        Product::findOrFail($product->id);
 
         $product->delete();
 
         $this->expectException(ProductNotFoundException::class);
-        $this->product->findOrFail($product->id);
+        Product::findOrFail($product->id);
     }
 
     /** @test */
     public function images_can_be_added_to_a_product()
     {
-        $product = $this->product->create([
+        $product = Product::create([
             'sku' => 'SKU0001',
             'name' => 'Example Product',
             'weight' => 25,

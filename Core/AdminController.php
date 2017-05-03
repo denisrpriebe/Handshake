@@ -44,6 +44,12 @@ abstract class AdminController extends Action
      */
     protected $activeMenu = '';
 
+    /**
+     * AdminController constructor.
+     *
+     * @param Context $context
+     * @param PageFactory $pageFactory
+     */
     public function __construct(Context $context, PageFactory $pageFactory)
     {
         $this->context = $context;
@@ -69,7 +75,7 @@ abstract class AdminController extends Action
     }
 
     /**
-     * Create the pag object.
+     * Create the page object.
      *
      * @return void
      */

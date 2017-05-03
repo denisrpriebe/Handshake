@@ -22,6 +22,8 @@
 
                 <item name="irishtitan_handshake_command_seedcommand" xsi:type="object">IrishTitan\Handshake\Commands\SeedCommand</item>
 
+                <item name="irishtitan_handshake_command_makecommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeCommand</item>
+
             </argument>
         </arguments>
     </type>

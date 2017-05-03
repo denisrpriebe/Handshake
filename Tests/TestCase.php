@@ -11,6 +11,7 @@ class TestCase extends PHPUnit
     /**
      * Bootstrap Magento and get our class ready for testing.
      *
+     * @return void
      */
     protected function setUp()
     {

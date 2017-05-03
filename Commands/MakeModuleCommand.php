@@ -3,7 +3,7 @@
 namespace IrishTitan\Handshake\Commands;
 
 use IrishTitan\Handshake\Core\Command;
-use IrishTitan\Handshake\Utilities\Directory;
+use IrishTitan\Handshake\Facades\Directory;
 use SebastiaanLuca\StubGenerator\StubGenerator;
 
 class MakeModuleCommand extends Command
@@ -54,7 +54,7 @@ class MakeModuleCommand extends Command
         $this->createDirectories($namespace, $name);
         $this->createFiles($namespace, $name);
 
-        $this->output->writeln('Module scaffolding created successfully.');
+        $this->output->writeln('<info>Module scaffolding created successfully.</info>');
     }
 
     /**
@@ -83,23 +83,27 @@ class MakeModuleCommand extends Command
      */
     private function createFiles($namespace, $name)
     {
-        $stub = new StubGenerator(
+
+        // Create module.xml
+        (new StubGenerator(
             __DIR__ . '/../Stubs/module.stub',
             'app/code/' . $namespace . '/' . $name . '/etc/module.xml'
-        );
-
-        $stub->render([
+        ))->render([
             ':MODULE:' => $name,
             ':NAMESPACE:' => $namespace,
         ]);
 
+        // Create di.xml
+        (new StubGenerator(
+            __DIR__ . '/../Stubs/di.stub',
+            'app/code/' . $namespace . '/' . $name . '/etc/di.xml'
+        ))->render([]);
 
-        $stub = new StubGenerator(
+        // Create registration.php
+        (new StubGenerator(
             __DIR__ . '/../Stubs/registration.stub',
             'app/code/' . $namespace . '/' . $name . '/registration.php'
-        );
-
-        $stub->render([
+        ))->render([
             ':MODULE:' => $name,
             ':NAMESPACE:' => $namespace,
         ]);

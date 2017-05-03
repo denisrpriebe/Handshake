@@ -1,0 +1,43 @@
+<?php
+
+namespace :NAMESPACE:\:MODULE:\Commands;
+
+use IrishTitan\Handshake\Core\Command;
+
+class :COMMAND: extends Command
+{
+
+    /**
+     * The command syntax.
+     *
+     * @var string
+     */
+    protected $signature = 'my:command';
+
+    /**
+     * The command description.
+     *
+     * @var string
+     */
+    protected $description = 'My command description.';
+
+    /**
+     * The arguments the command accepts.
+     *
+     * @var array
+     */
+    protected $arguments = [
+
+    ];
+
+    /**
+     * Perform the command.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+
+    }
+
+}
