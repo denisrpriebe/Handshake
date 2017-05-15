@@ -5,6 +5,7 @@ namespace IrishTitan\Handshake\Core\Entities;
 use Illuminate\Support\Collection;
 use IrishTitan\Handshake\Core\MagentoEntity;
 use IrishTitan\Handshake\Exceptions\ProductNotFoundException;
+use IrishTitan\Handshake\Facades\Category as CategoryFacade;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Catalog\Model\ProductRepository;
@@ -13,6 +14,13 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class Product extends MagentoEntity
 {
+    /**
+     * The Magento Product instance.
+     *
+     * @var \Magento\Catalog\Model\Product
+     */
+    protected $entity;
+
     /**
      * Product constructor.
      *
@@ -43,34 +51,13 @@ class Product extends MagentoEntity
     }
 
     /**
-     * Get all products.
-     *
-     * @param int $store
-     * @return Collection
-     */
-    public function all($store = 0)
-    {
-        return collect($this->collection->create()
-            ->addAttributeToSelect('*')
-            ->setStoreId($store)
-            ->load())
-            ->map(function ($item, $key) {
-
-                $instance = $this->instantiate();
-                $instance->entity = $item;
-
-                return $instance;
-            });
-    }
-
-    /**
      * Find the product by the given id.
      *
      * @param $id
      * @param int $store
      * @return ProductInterface|mixed|null
      */
-    public function find($id, $store = 0)
+    public function find($id, $store = null)
     {
         try {
 
@@ -94,7 +81,7 @@ class Product extends MagentoEntity
      * @return ProductInterface|mixed
      * @throws ProductNotFoundException
      */
-    public function findOrFail($id, $store = 0)
+    public function findOrFail($id, $store = null)
     {
         try {
 
@@ -116,7 +103,7 @@ class Product extends MagentoEntity
      * @param int $store
      * @return $this|null
      */
-    public function whereSku($sku, $store = 0)
+    public function whereSku($sku, $store = null)
     {
         try {
 
@@ -129,28 +116,6 @@ class Product extends MagentoEntity
         }
 
         return $this;
-    }
-
-    /**
-     * Save the product.
-     *
-     * @return $this
-     */
-    public function save()
-    {
-        $this->entity = $this->repository->save($this->entity);
-
-        return $this;
-    }
-
-    /**
-     * Delete the given product.
-     *
-     * @return void
-     */
-    public function delete()
-    {
-        $this->repository->delete($this->entity);
     }
 
     /**
@@ -180,36 +145,53 @@ class Product extends MagentoEntity
     }
 
     /**
-     * Create a new product and save it to the database.
+     * Get all the categories this product is in.
      *
-     * @param array $attributes
-     * @return Product
+     * @return Collection
      */
-    public function create(array $attributes)
+    public function categories()
     {
-        $this->make($attributes);
+        return collect($this->entity->getCategoryIds())
+            ->map(function ($categoryId) {
+                return CategoryFacade::find($categoryId);
+            });
+    }
+
+    /**
+     * Add this product to a category.
+     *
+     * @param Category $category
+     * @return $this
+     */
+    public function assignToCategory(Category $category)
+    {
+        $existingCategories = $this->entity->getCategoryIds();
+
+        $existingCategories[] = $category->id;
+
+        $this->entity->setCategoryIds($existingCategories);
 
         return $this->save();
     }
 
     /**
-     * Make a new product. Does not save to the
-     * database right away.
+     * Get all products.
      *
-     * @param array $attributes
-     * @return $this
+     * @param int $store
+     * @return Collection
      */
-    public function make(array $attributes)
+    public function all($store = null)
     {
-        $this->entity = $this->factory->create();
+        return collect($this->collection->create()
+            ->addAttributeToSelect('*')
+            ->setStoreId($store)->load())
+            ->map(function ($item, $key) {
 
-        $this->fillDefaults();
+                $instance = $this->instantiate();
+                $instance->entity = $item;
 
-        foreach ($attributes as $key => $attribute) {
-            $this->entity->setData($key, $attribute);
-        }
-
-        return $this;
+                return $instance;
+            });
     }
 
     /**

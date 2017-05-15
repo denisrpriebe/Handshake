@@ -2,9 +2,16 @@
 
 namespace IrishTitan\Handshake\Facades;
 
-use IrishTitan\Handshake\Core\Facade;
 use IrishTitan\Handshake\Core\Entities\Product as ProductCore;
+use IrishTitan\Handshake\Core\Facade;
 
+/**
+ * Class Product
+ *
+ * @method boolean find($id, $store = null)
+ *
+ * @package IrishTitan\Handshake\Facades
+ */
 class Product extends Facade
 {
 

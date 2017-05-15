@@ -2,9 +2,9 @@
 
 namespace IrishTitan\Handshake\Tests\Features;
 
-use IrishTitan\Handshake\Core\App;
-use IrishTitan\Handshake\Facades\Product;
 use IrishTitan\Handshake\Exceptions\ProductNotFoundException;
+use IrishTitan\Handshake\Facades\Category;
+use IrishTitan\Handshake\Facades\Product;
 use IrishTitan\Handshake\Tests\TestCase;
 
 class ProductTest extends TestCase
@@ -55,6 +55,34 @@ class ProductTest extends TestCase
         $this->assertSame('Example Product', $product->name);
         $this->assertSame('25.0000', $product->weight);
         $this->assertSame('100.5000', $product->price);
+
+        $product->delete();
+    }
+
+    /** @test */
+    public function a_product_can_be_assigned_to_categories()
+    {
+        $product = $this->createProduct();
+        $categoryA = Category::create(['name' => 'Category A']);
+        $categoryB = Category::create(['name' => 'Category B']);
+
+        $product->assignToCategory($categoryA);
+        $product->assignToCategory($categoryB);
+
+        $categoryASet = $product->categories()->contains(function ($category) use ($categoryA) {
+            return $category->id === $categoryA->id;
+        });
+
+        $categoryBSet = $product->categories()->contains(function ($category) use ($categoryB) {
+            return $category->id === $categoryB->id;
+        });
+
+        $this->assertTrue($categoryASet);
+        $this->assertTrue($categoryBSet);
+
+        $product->delete();
+        $categoryA->delete();
+        $categoryB->delete();
     }
 
     /**

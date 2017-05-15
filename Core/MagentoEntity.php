@@ -42,6 +42,33 @@ abstract class MagentoEntity
     }
 
     /**
+     * Fill in the "default" entity data when creating
+     * a new instance.
+     *
+     * @return void
+     */
+    abstract protected function fillDefaults();
+
+    /**
+     * Find the entity by id.
+     *
+     * @param $id
+     * @param null $store
+     * @return mixed
+     */
+    abstract public function find($id, $store = null);
+
+    /**
+     * Find the entity by id and throw an exception if not
+     * found.
+     *
+     * @param $id
+     * @param null $store
+     * @return mixed
+     */
+    abstract public function findOrFail($id, $store = null);
+
+    /**
      * Get the entity attributes as properties.
      *
      * @param $name
@@ -86,6 +113,61 @@ abstract class MagentoEntity
     protected function instantiate()
     {
         return App::make(static::class);
+    }
+
+    /**
+     * Delete the entity.
+     *
+     * @return void
+     */
+    public function delete()
+    {
+        $this->repository->delete($this->entity);
+    }
+
+    /**
+     * Save the entity.
+     *
+     * @return $this
+     */
+    public function save()
+    {
+        $this->entity = $this->repository->save($this->entity);
+
+        return $this;
+    }
+
+    /**
+     * Create a new entity and save it to the database.
+     *
+     * @param array $attributes
+     * @return Category
+     */
+    public function create(array $attributes)
+    {
+        $this->make($attributes);
+
+        return $this->save();
+    }
+
+    /**
+     * Make a new entity. Does not get saved to the database
+     * right away.
+     *
+     * @param array $attributes
+     * @return $this
+     */
+    public function make(array $attributes)
+    {
+        $this->entity = $this->factory->create();
+
+        $this->fillDefaults();
+
+        foreach ($attributes as $key => $attribute) {
+            $this->entity->setData($key, $attribute);
+        }
+
+        return $this;
     }
 
 }

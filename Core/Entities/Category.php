@@ -129,7 +129,7 @@ class Category extends MagentoEntity
     {
         $existingCategories = $product->get()->getCategoryIds();
 
-        $existingCategories[] = $this->entity->getId();
+        $existingCategories[] = $this->id;
 
         $product->get()->setCategoryIds($existingCategories);
 
@@ -163,54 +163,11 @@ class Category extends MagentoEntity
     }
 
     /**
-     * Delete the category.
-     *
-     * @return void
-     */
-    public function delete()
-    {
-        $this->repository->delete($this->entity);
-    }
-
-    /**
-     * Create a new category and save it to the database.
-     *
-     * @param array $attributes
-     * @return Category
-     */
-    public function create(array $attributes)
-    {
-        $this->make($attributes);
-
-        return $this->save();
-    }
-
-    /**
-     * Make a new category. Does not get saved to the database
-     * right away.
-     *
-     * @param array $attributes
-     * @return $this
-     */
-    public function make(array $attributes)
-    {
-        $this->entity = $this->factory->create();
-
-        $this->fillDefaults();
-
-        foreach ($attributes as $key => $attribute) {
-            $this->entity->setData($key, $attribute);
-        }
-
-        return $this;
-    }
-
-    /**
      * Fill in the category with default data.
      *
      * @return void
      */
-    private function fillDefaults()
+    protected function fillDefaults()
     {
         $this->entity->setIsActive(true);
     }
