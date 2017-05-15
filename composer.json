@@ -9,7 +9,8 @@
   "require": {
     "php": ">=7.0",
     "illuminate/database": "^5.4",
-    "sebastiaanluca/php-stub-generator": "^0.1.1"
+    "sebastiaanluca/php-stub-generator": "^0.1.1",
+    "fzaninotto/faker": "^1.6"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.0"

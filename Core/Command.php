@@ -4,6 +4,8 @@ namespace IrishTitan\Handshake\Core;
 
 use IrishTitan\Handshake\Contracts\CommandContract;
 use IrishTitan\Handshake\Exceptions\InvalidModeException;
+use Magento\Framework\App\State;
+use Magento\Framework\Exception\LocalizedException;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface as Input;
@@ -48,6 +50,18 @@ class Command extends SymfonyCommand implements CommandContract
     protected $arguments = [];
 
     /**
+     * Command constructor.
+     *
+     * @param State $state
+     */
+    public function __construct(State $state)
+    {
+        $this->setAreaCode($state, 'frontend');
+
+        parent::__construct();
+    }
+
+    /**
      * Set the command details.
      *
      * @return void
@@ -61,6 +75,25 @@ class Command extends SymfonyCommand implements CommandContract
 
         $this->setName($this->signature)
             ->setDescription($this->description);
+    }
+
+    /**
+     * Set the area code.
+     *
+     * @param State $state
+     * @param $code
+     */
+    private function setAreaCode(State $state, $code)
+    {
+        try {
+
+            $state->setAreaCode($code);
+
+        } catch (LocalizedException $exception) {
+
+            // intentionally left empty
+
+        }
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace IrishTitan\Handshake\Commands;
 
 use IrishTitan\Handshake\Core\Command;
-use IrishTitan\Handshake\Utilities\Directory;
+use IrishTitan\Handshake\Facades\Directory;
 
 class ClearCommand extends Command
 {

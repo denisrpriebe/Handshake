@@ -3,7 +3,7 @@
 namespace IrishTitan\Handshake\Facades;
 
 use IrishTitan\Handshake\Core\Facade;
-use IrishTitan\Handshake\Core\Product as ProductCore;
+use IrishTitan\Handshake\Core\Entities\Product as ProductCore;
 
 class Product extends Facade
 {

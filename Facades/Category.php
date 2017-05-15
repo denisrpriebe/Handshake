@@ -2,7 +2,7 @@
 
 namespace IrishTitan\Handshake\Facades;
 
-use IrishTitan\Handshake\Core\Category as CategoryCore;
+use IrishTitan\Handshake\Core\Entities\Category as CategoryCore;
 use IrishTitan\Handshake\Core\Facade;
 
 class Category extends Facade

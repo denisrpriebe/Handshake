@@ -3,7 +3,7 @@
 namespace IrishTitan\Handshake\Tests\Features;
 
 use IrishTitan\Handshake\Core\App;
-use IrishTitan\Handshake\Core\Product;
+use IrishTitan\Handshake\Core\Entities\Product;
 use IrishTitan\Handshake\Tests\TestCase;
 
 class AppTest extends TestCase
@@ -23,7 +23,7 @@ class AppTest extends TestCase
     {
         $product = App::make(Product::class);
 
-        $this->assertSame('IrishTitan\Handshake\Core\Product', get_class($product));
+        $this->assertSame('IrishTitan\Handshake\Core\Entities\Product', get_class($product));
     }
 
 

@@ -31,7 +31,9 @@ abstract class Facade
      */
     protected static function core()
     {
-        return App::make((new static())->class);
+        $instance = new static();
+
+        return App::make($instance->class);
     }
 
 }

@@ -17,7 +17,7 @@ class App
     {
         $objectManager = ObjectManager::getInstance();
 
-        return $objectManager->get($class);
+        return $objectManager->create($class);
     }
 
 }
