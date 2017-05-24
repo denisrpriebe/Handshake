@@ -18,7 +18,7 @@
 
                 <item name="irishtitan_handshake_command_migratecommand" xsi:type="object">IrishTitan\Handshake\Commands\MigrateCommand</item>
 
-                <item name="irishtitan_handshake_command_rollbackcommand" xsi:type="object">IrishTitan\Handshake\Commands\rollbackCommand</item>
+                <item name="irishtitan_handshake_command_rollbackcommand" xsi:type="object">IrishTitan\Handshake\Commands\RollbackCommand</item>
 
                 <item name="irishtitan_handshake_command_seedcommand" xsi:type="object">IrishTitan\Handshake\Commands\SeedCommand</item>
 
