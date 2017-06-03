@@ -8,7 +8,6 @@ use IrishTitan\Handshake\Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
-
     /**
      * Get our class ready for testing.
      *
@@ -112,6 +111,41 @@ class CategoryTest extends TestCase
 
         $categoryB->delete();
         $categoryC->delete();
+    }
+
+    /** @test */
+    public function if_a_category_is_not_found_it_will_be_created()
+    {
+        $shoesCategory = Category::firstOrNew([
+            'name' => 'Shoes'
+        ]);
+
+        $this->assertNotNull($shoesCategory->id);
+
+        $shoesCategoryTwo = Category::firstOrNew([
+            'name' => 'Shoes'
+        ]);
+
+        $this->assertSame($shoesCategory->id, $shoesCategoryTwo->id);
+
+        $shoesCategory->delete();
+    }
+
+    /** @test */
+    public function a_category_can_have_child_categories()
+    {
+        $categoryB = Category::whereName('Category B');
+
+        $children = $categoryB->children();
+
+        foreach ($children as $child) {
+            var_dump($child->get()->getName());
+        }
+
+        die();
+
+        $this->assertSame(2, $children->count());
+        $this->assertSame('Category B-1', $children->first()->name);
     }
 
     /**

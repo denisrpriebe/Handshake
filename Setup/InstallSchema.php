@@ -1,19 +1,21 @@
 <?php
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
 
 namespace IrishTitan\Handshake\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\SchemaSetupInterface;
+use Magento\Framework\Setup\ModuleContextInterface as Context;
+use Magento\Framework\Setup\SchemaSetupInterface as Setup;
 
 class InstallSchema implements InstallSchemaInterface
 {
 
-    public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    /**
+     * Run the migrations on 'setup:upgrade'.
+     *
+     * @param Setup $setup
+     * @param Context $context
+     */
+    public function install(Setup $setup, Context $context)
     {
         $setup->startSetup();
 

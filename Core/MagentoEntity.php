@@ -170,4 +170,26 @@ abstract class MagentoEntity
         return $this;
     }
 
+    /**
+     * Find the entity or create a new one if not found.
+     *
+     * @param array $attributes
+     * @param null $store
+     * @return Category
+     */
+    public function firstOrNew(array $attributes, $store = null)
+    {
+        $collection = $this->collection->create();
+
+        foreach ($attributes as $key => $attribute) {
+            $collection->addAttributeToFilter($key, $attribute);
+        }
+
+        $this->entity = $collection->setStoreId($store)
+            ->addAttributeToSelect('*')
+            ->getFirstItem();
+
+        return $this->entity->getId() === null ? $this->create($attributes) : $this;
+    }
+
 }
