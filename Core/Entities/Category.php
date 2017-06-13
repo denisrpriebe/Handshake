@@ -9,6 +9,7 @@ use Magento\Catalog\Model\CategoryFactory;
 use Magento\Catalog\Model\CategoryRepository;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Store\Model\StoreManagerInterface as Store;
 
 class Category extends MagentoEntity
 {
@@ -25,10 +26,14 @@ class Category extends MagentoEntity
      * @param CategoryFactory $factory
      * @param CategoryRepository $repository
      * @param CollectionFactory $collection
+     * @param Store $store
      */
-    public function __construct(CategoryFactory $factory, CategoryRepository $repository, CollectionFactory $collection)
+    public function __construct(CategoryFactory $factory, CategoryRepository $repository, CollectionFactory $collection, Store $store)
     {
         parent::__construct();
+
+        //$store->setCurrentStore('all');
+        //$store->getStore()->setId(0);
 
         $this->factory = $factory;
         $this->repository = $repository;
@@ -117,15 +122,23 @@ class Category extends MagentoEntity
     }
 
     /**
-     * Save the category.
+     * Get all categories.
      *
-     * @return $this
+     * @param null $store
+     * @return static
      */
-    public function save()
+    public function all($store = null)
     {
-        $this->entity = $this->repository->save($this->entity);
+        $categories = $this->collection->create()
+            ->addAttributeToSelect('*')
+            ->setStoreId($store)->load();
 
-        return $this;
+        return collect($categories)->map(function ($item, $key) {
+            $instance = $this->instantiate();
+            $instance->entity = $item;
+
+            return $instance;
+        });
     }
 
     /**
@@ -153,6 +166,8 @@ class Category extends MagentoEntity
     public function setParent(Category $category)
     {
         $this->entity->setParentId($category->id);
+        $this->entity->setPath($category->get()->getPath());
+        $this->entity->setLevel($category->get()->getLevel() + 1);
 
         return $this;
     }
@@ -171,7 +186,7 @@ class Category extends MagentoEntity
     }
 
     /**
-     * Get the children of the category.
+     * Get the child categories of the category.
      *
      * @param int $level
      * @param null $store
@@ -179,18 +194,20 @@ class Category extends MagentoEntity
      */
     public function children($level = 1, $store = null)
     {
-        return collect($this->collection->create()
+        $children = $this->collection->create()
             ->setStoreId($store)
             ->addAttributeToSelect('*')
             ->addPathsFilter($this->entity->getPath() . '/')
-            ->addLevelFilter($this->entity->getLevel() + $level))
-            ->map(function ($item, $key) {
+            ->addLevelFilter($this->entity->getLevel() + $level);
 
-                $instance = $this->instantiate();
-                $instance->entity = $item;
+        return collect($children)->map(function ($category) {
 
-                return $instance;
-            });
+            $instance = $this->instantiate();
+            $instance->entity = $category;
+
+            return $instance;
+
+        });
     }
 
     /**
@@ -201,6 +218,47 @@ class Category extends MagentoEntity
     protected function fillDefaults()
     {
         $this->entity->setIsActive(true);
+    }
+
+    /**
+     * Run through a list of filters before we
+     * attempt to return an attribute dynamically.
+     *
+     * @param $name
+     * @return mixed|string
+     */
+    protected function checkGetFilters($name)
+    {
+        if ($name === 'id') {
+            return $this->entity->getData('entity_id');
+        }
+
+        if ($name === 'url') {
+            return $this->entity->getUrl();
+        }
+
+        if ($name === 'img') {
+            return $this->entity->getImageUrl();
+        }
+
+        return false;
+    }
+
+    /**
+     * Run through this list of filters before we attempt
+     * to set the product attribute via properties.
+     *
+     * @param $name
+     * @param $value
+     * @return bool
+     */
+    protected function checkSetFilters($name, $value)
+    {
+//        if ($name === 'qty') {
+//            return $this->entity->setStockData(['qty' => $value]);
+//        }
+
+        return false;
     }
 
 

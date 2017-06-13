@@ -56,7 +56,7 @@ abstract class MagentoEntity
      * @param null $store
      * @return mixed
      */
-    abstract public function find($id, $store = null);
+    abstract public function find($id, $store = 0);
 
     /**
      * Find the entity by id and throw an exception if not
@@ -66,7 +66,7 @@ abstract class MagentoEntity
      * @param null $store
      * @return mixed
      */
-    abstract public function findOrFail($id, $store = null);
+    abstract public function findOrFail($id, $store = 0);
 
     /**
      * Get the entity attributes as properties.
@@ -76,11 +76,7 @@ abstract class MagentoEntity
      */
     public function __get($name)
     {
-        if ($name === 'id') {
-            return $this->entity->getData('entity_id');
-        }
-
-        return $this->entity->getData($name);
+        return $this->checkGetFilters($name) ?: $this->entity->getData($name);
     }
 
     /**
@@ -92,13 +88,43 @@ abstract class MagentoEntity
      */
     public function __set($name, $value)
     {
-        return $this->entity->setData($name, $value);
+        return $this->checkSetFilters($name, $value) ?: $this->entity->setData($name, $value);
+    }
+
+    /**
+     * Get the factory instance.
+     *
+     * @return mixed
+     */
+    public function factory()
+    {
+        return $this->factory;
+    }
+
+    /**
+     * Get the repository instance.
+     *
+     * @return mixed
+     */
+    public function repository()
+    {
+        return $this->repository;
+    }
+
+    /**
+     * Get the collection instance.
+     *
+     * @return mixed
+     */
+    public function collection()
+    {
+        return $this->collection;
     }
 
     /**
      * Get the entity instance.
      *
-     * @return \Magento\Catalog\Model\Product
+     * @return
      */
     public function get()
     {
@@ -177,7 +203,7 @@ abstract class MagentoEntity
      * @param null $store
      * @return Category
      */
-    public function firstOrNew(array $attributes, $store = null)
+    public function firstOrNew(array $attributes, $store = 0)
     {
         $collection = $this->collection->create();
 

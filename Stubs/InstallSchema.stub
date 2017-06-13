@@ -1,0 +1,18 @@
+<?php
+
+namespace :NAMESPACE:\:MODULE:\Setup;
+
+use IrishTitan\Handshake\Core\MagentoSchemaInstaller;
+
+class InstallSchema extends MagentoSchemaInstaller
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    protected function run()
+    {
+
+    }
+}

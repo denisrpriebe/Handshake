@@ -57,7 +57,7 @@ class CategoryTest extends TestCase
     /** @test */
     public function category_data_can_be_changed()
     {
-        $category = Category::create([
+        $category = Category::firstOrNew([
             'name' => 'Category A',
             'url_key' => 'category-a-url-key',
             'description' => 'Category A Description Text.',
@@ -67,6 +67,7 @@ class CategoryTest extends TestCase
         ]);
 
         $category->save();
+        $category = Category::find($category->id);
 
         $this->assertSame('Category A', $category->name);
         $this->assertSame('category-a-url-key', $category->url_key);
@@ -83,7 +84,6 @@ class CategoryTest extends TestCase
         $category->meta_description = 'Category B Meta Description';
 
         $category->save();
-
         $category = Category::find($category->id);
 
         $this->assertSame('Category B', $category->name);
@@ -93,7 +93,7 @@ class CategoryTest extends TestCase
         $this->assertSame('Category B Meta Keywords', $category->meta_keywords);
         $this->assertSame('Category B Meta Description', $category->meta_description);
 
-        $category->delete();
+//        $category->delete();
     }
 
     /** @test */
@@ -134,18 +134,30 @@ class CategoryTest extends TestCase
     /** @test */
     public function a_category_can_have_child_categories()
     {
-        $categoryB = Category::whereName('Category B');
+        $parent = Category::create([
+            'name' => 'Parent Category'
+        ]);
 
-        $children = $categoryB->children();
+        $childA = Category::create([
+            'name' => 'Child A'
+        ]);
 
-        foreach ($children as $child) {
-            var_dump($child->get()->getName());
-        }
+        $childB = Category::create([
+            'name' => 'Child B'
+        ]);
 
-        die();
+        $childA->setParent($parent);
+        $childB->setParent($parent);
 
-        $this->assertSame(2, $children->count());
-        $this->assertSame('Category B-1', $children->first()->name);
+        $parent->save();
+        $childA->save();
+        $childB->save();
+
+        $this->assertSame(2, $parent->children()->count());
+
+        $parent->delete();
+        $childB->delete();
+        $childA->delete();
     }
 
     /**

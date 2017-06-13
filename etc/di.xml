@@ -24,7 +24,8 @@
 
                 <item name="irishtitan_handshake_command_makecommand" xsi:type="object">IrishTitan\Handshake\Commands\MakeCommand</item>
 
-            </argument>
+                <item name="irishtitan_handshake_commands_removecategoriescommand" xsi:type="object">IrishTitan\Handshake\Commands\RemoveCategoriesCommand</item>
+            <item name="irishtitan_handshake_commands_removeproductscommand" xsi:type="object">IrishTitan\Handshake\Commands\RemoveProductsCommand</item></argument>
         </arguments>
     </type>
 </config>

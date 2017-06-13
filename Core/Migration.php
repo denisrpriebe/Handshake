@@ -25,12 +25,24 @@ class Migration
         return (new ReflectionClass(static::class))->getShortName();
     }
 
+
+
+    /**
+     * Run the migration.
+     *
+     * @return void
+     */
     public static function migrate()
     {
         $migration = new static;
         $migration->up();
     }
 
+    /**
+     * Run the inverse of the migration.
+     *
+     * @return void
+     */
     public static function reverse()
     {
         $migration = new static;

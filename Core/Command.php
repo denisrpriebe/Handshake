@@ -133,6 +133,39 @@ class Command extends SymfonyCommand implements CommandContract
     }
 
     /**
+     * Output text to the console as info.
+     *
+     * @param $text
+     * @return mixed
+     */
+    protected function info($text)
+    {
+        return $this->output->writeln('<info>' . $text . '</info>');
+    }
+
+    /**
+     * Output text to the console as an error.
+     *
+     * @param $text
+     * @return mixed
+     */
+    protected function error($text)
+    {
+        return $this->output->writeln('<error>' . $text . '</error>');
+    }
+
+    /**
+     * Output text to the console as a line.
+     *
+     * @param $text
+     * @return mixed
+     */
+    protected function line($text)
+    {
+        return $this->output->writeln($text);
+    }
+
+    /**
      * Perform the command.
      *
      */

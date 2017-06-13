@@ -38,19 +38,6 @@ class Product extends MagentoEntity
     }
 
     /**
-     * Set the product attributes dynamically via properties.
-     *
-     * @param $name
-     * @param $value
-     * @return mixed
-     */
-    public function __set($name, $value)
-    {
-        return $this->checkFilters($name, $value) ?:
-            $this->entity->setData($name, $value);
-    }
-
-    /**
      * Find the product by the given id.
      *
      * @param $id
@@ -218,6 +205,22 @@ class Product extends MagentoEntity
     }
 
     /**
+     * Run through a list of filters before we
+     * attempt to return an attribute dynamically.
+     *
+     * @param $name
+     * @return mixed|string
+     */
+    protected function checkGetFilters($name)
+    {
+        if ($name === 'id') {
+            return $this->entity->getData('entity_id');
+        }
+
+        return false;
+    }
+
+    /**
      * Run through this list of filters before we attempt
      * to set the product attribute via properties.
      *
@@ -225,17 +228,13 @@ class Product extends MagentoEntity
      * @param $value
      * @return bool
      */
-    private function checkFilters($name, $value)
+    protected function checkSetFilters($name, $value)
     {
-        switch ($name) {
-
-            case 'qty':
-                $this->entity->setStockData(['qty' => $value]);
-                return true;
-
-            default:
-                return false;
+        if ($name === 'qty') {
+            return $this->entity->setStockData(['qty' => $value]);
         }
+
+        return false;
     }
 
 }
