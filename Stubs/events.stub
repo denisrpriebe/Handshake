@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <!-- Add your events here -->
+
+    <event name="my_custom_event">
+        <observer name="my_custom_event_listener" instance="Path\To\Listener" shared="false" />
+    </event>
+
+</config>

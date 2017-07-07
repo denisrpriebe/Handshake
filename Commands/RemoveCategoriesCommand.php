@@ -2,6 +2,7 @@
 
 namespace IrishTitan\Handshake\Commands;
 
+use Exception;
 use IrishTitan\Handshake\Core\Command;
 use IrishTitan\Handshake\Facades\Category;
 
@@ -59,7 +60,7 @@ class RemoveCategoriesCommand extends Command
                 $category->delete();
                 $this->info($category->name . ' category deleted.');
 
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
 
                 $this->error('Could not delete ' . $category->name . '.');
 

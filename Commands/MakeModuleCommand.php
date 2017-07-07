@@ -70,6 +70,7 @@ class MakeModuleCommand extends Command
         Directory::make('app/code/' . $namespace . '/' . $name . '/Commands');
         Directory::make('app/code/' . $namespace . '/' . $name . '/etc');
         Directory::make('app/code/' . $namespace . '/' . $name . '/Models');
+        Directory::make('app/code/' . $namespace . '/' . $name . '/Listeners');
         Directory::make('app/code/' . $namespace . '/' . $name . '/Setup');
         Directory::make('app/code/' . $namespace . '/' . $name . '/Setup/Migrations');
         Directory::make('app/code/' . $namespace . '/' . $name . '/Setup/Seeds');
@@ -78,6 +79,7 @@ class MakeModuleCommand extends Command
         Directory::make('app/code/' . $namespace . '/' . $name . '/view/frontend');
         Directory::make('app/code/' . $namespace . '/' . $name . '/Controller');
         Directory::make('app/code/' . $namespace . '/' . $name . '/Controller/Adminhtml');
+        Directory::make('app/code/' . $namespace . '/' . $name . '/Block');
         Directory::make('app/code/' . $namespace . '/' . $name . '/Block/Adminhtml');
     }
 
@@ -103,6 +105,12 @@ class MakeModuleCommand extends Command
         (new StubGenerator(
             __DIR__ . '/../Stubs/di.stub',
             'app/code/' . $namespace . '/' . $name . '/etc/di.xml'
+        ))->render([]);
+
+        // Create events.xml
+        (new StubGenerator(
+            __DIR__ . '/../Stubs/events.stub',
+            'app/code/' . $namespace . '/' . $name . '/etc/events.xml'
         ))->render([]);
 
         // Create registration.php

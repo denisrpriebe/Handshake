@@ -25,8 +25,6 @@ class Migration
         return (new ReflectionClass(static::class))->getShortName();
     }
 
-
-
     /**
      * Run the migration.
      *
@@ -34,8 +32,7 @@ class Migration
      */
     public static function migrate()
     {
-        $migration = new static;
-        $migration->up();
+        (new static)->up();
     }
 
     /**
@@ -45,8 +42,7 @@ class Migration
      */
     public static function reverse()
     {
-        $migration = new static;
-        $migration->down();
+        (new static)->down();
     }
 
 }

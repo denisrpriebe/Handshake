@@ -188,14 +188,15 @@ class Product extends MagentoEntity
      */
     protected function fillDefaults()
     {
+        $this->entity->setName($this->faker->word);
         $this->entity->setSku(uniqid());
         $this->entity->setAttributeSetId(4);
         $this->entity->setStatus(1);
-        $this->entity->setWeight(1);
+        $this->entity->setWeight($this->faker->numberBetween(1, 10));
         $this->entity->setVisibility(4);
         $this->entity->setTaxClassId(0);
         $this->entity->setTypeId('simple');
-        $this->entity->setPrice('5.00');
+        $this->entity->setPrice($this->faker->numberBetween(1, 500));
         $this->entity->setStockData([
             'use_config_manage_stock' => 0,
             'manage_stock' => 1,

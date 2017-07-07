@@ -2,6 +2,7 @@
 
 namespace IrishTitan\Handshake\Commands;
 
+use Exception;
 use IrishTitan\Handshake\Core\Command;
 use IrishTitan\Handshake\Facades\Product;
 
@@ -60,7 +61,7 @@ class RemoveProductsCommand extends Command
                 $product->delete();
                 $this->info('Removed ' . $product->name);
 
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
 
                 $this->error('Unable to remove ' . $product->name);
 

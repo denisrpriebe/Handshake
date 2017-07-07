@@ -8,7 +8,6 @@ use IrishTitan\Handshake\Tests\TestCase;
 
 class SessionTest extends TestCase
 {
-
     /**
      * The session instance.
      *

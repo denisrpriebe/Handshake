@@ -2,6 +2,8 @@
 
 namespace IrishTitan\Handshake\Core;
 
+use Faker\Factory;
+
 abstract class MagentoEntity
 {
     /**
@@ -33,12 +35,21 @@ abstract class MagentoEntity
     protected $entity;
 
     /**
+     * The faker instance.
+     *
+     * @var Generator
+     */
+    protected $faker;
+
+    /**
      * MagentoEntity constructor.
      *
      */
     public function __construct()
     {
         Handshake::start();
+
+        $this->faker = Factory::create();
     }
 
     /**
@@ -53,7 +64,7 @@ abstract class MagentoEntity
      * Find the entity by id.
      *
      * @param $id
-     * @param null $store
+     * @param int|null $store
      * @return mixed
      */
     abstract public function find($id, $store = 0);
@@ -63,7 +74,7 @@ abstract class MagentoEntity
      * found.
      *
      * @param $id
-     * @param null $store
+     * @param int|null $store
      * @return mixed
      */
     abstract public function findOrFail($id, $store = 0);
@@ -167,9 +178,9 @@ abstract class MagentoEntity
      * Create a new entity and save it to the database.
      *
      * @param array $attributes
-     * @return Category
+     * @return $this
      */
-    public function create(array $attributes)
+    public function create(array $attributes = [])
     {
         $this->make($attributes);
 
@@ -183,7 +194,7 @@ abstract class MagentoEntity
      * @param array $attributes
      * @return $this
      */
-    public function make(array $attributes)
+    public function make(array $attributes = [])
     {
         $this->entity = $this->factory->create();
 
@@ -200,8 +211,8 @@ abstract class MagentoEntity
      * Find the entity or create a new one if not found.
      *
      * @param array $attributes
-     * @param null $store
-     * @return Category
+     * @param int|null $store
+     * @return $this
      */
     public function firstOrNew(array $attributes, $store = 0)
     {
