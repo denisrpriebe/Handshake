@@ -235,6 +235,18 @@ class Product extends MagentoEntity
             return $this->entity->setStockData(['qty' => $value]);
         }
 
+        if ($name === 'is_in_stock') {
+            return $this->entity->setStockData(['is_in_stock' => $value]);
+        }
+
+        if ($name === 'manage_stock') {
+            return $this->entity->setStockData(['manage_stock' => $value]);
+        }
+
+        if ($name === 'use_config_manage_stock') {
+            return $this->entity->setStockData(['use_config_manage_stock' => $value]);
+        }
+
         return false;
     }
 
