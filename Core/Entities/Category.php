@@ -166,8 +166,6 @@ class Category extends MagentoEntity
     public function setParent(Category $category)
     {
         $this->entity->setParentId($category->id);
-        $this->entity->setPath($category->get()->getPath());
-        $this->entity->setLevel($category->get()->getLevel() + 1);
 
         return $this;
     }
