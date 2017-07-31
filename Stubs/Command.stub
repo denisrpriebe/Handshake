@@ -6,7 +6,6 @@ use IrishTitan\Handshake\Core\Command;
 
 class :COMMAND: extends Command
 {
-
     /**
      * The command syntax.
      *

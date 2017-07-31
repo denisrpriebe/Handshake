@@ -9,17 +9,15 @@ use IrishTitan\Handshake\Core\Schema;
 
 class :MIGRATION: extends Migration implements MigrationContract
 {
-
     /**
      * Run the migration.
      *
+     * @return void
      */
     public function up()
     {
-        Schema::create('YourTableName', function (Blueprint $table) {
+        Schema::create('table-name', function (Blueprint $table) {
             $table->increments('id');
-
-            // your migration code
 
             $table->timestamps();
         });
@@ -28,10 +26,11 @@ class :MIGRATION: extends Migration implements MigrationContract
     /**
      * Reverse the migration.
      *
+     * @return void
      */
     public function down()
     {
-        Schema::drop('YourTableName');
+        Schema::drop('table-name');
     }
 
 }

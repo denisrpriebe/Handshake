@@ -1,9 +1,8 @@
 <?php
 
-namespace IrishTitan\Handshake\Core\Entities;
+namespace IrishTitan\Handshake\Core\Catalog;
 
 use Illuminate\Support\Collection;
-use IrishTitan\Handshake\Core\MagentoEntity;
 use IrishTitan\Handshake\Exceptions\ProductNotFoundException;
 use IrishTitan\Handshake\Facades\Category as CategoryFacade;
 use Magento\Catalog\Api\Data\ProductInterface;

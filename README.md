@@ -17,9 +17,62 @@ After composer pulls in Handshake, you need to enable Handshake:
 Finish the installation by running:
 
     php bin/magento setup:upgrade
-    php bin/magento handshake:install
     
 If everything went smoothly, you are now ready to begin developing Magento 2 modules with Handshake.
+
+## Products
+
+When working with Magento 2 products, you may use the `IrishTitan\Handshake\Facades\Product` facade to perform a number of different actions. For example:
+
+To find a product by it's ID use the `find` method:
+
+    $product = Product::find(23);
+    
+To find a product by it's SKU use the `whereSku` method:
+
+    $product = Product::whereSku('PROD0001');
+    
+To get all products in the Magento 2 catalog use the `all` method:
+
+    $products = Product::all();
+    
+To add an image to a product use the `addImage` method:
+
+    $product = Product::find(123);
+    $product->addImage('path/to/first/image.jpg');
+    $product->addImage('path/to/second/image.jpg');
+    
+Alternatively, you may also do this as all Handshake methods are chain-able:
+
+    Product::find(123)
+        ->addImage('path/to/first/image.jpg')
+        ->addImage('path/to/second/image.jpg');
+    
+To get an array of all the images a product has use the `images` method:
+
+    $product = Product::whereSku('PROD0002');
+    $images = $product->images();
+    
+To get all the categories a products is in use the `categories` method:
+
+    $product = Product::find(487);
+    $categories = $product->categories();
+    
+To create a new product you may use the `create` method:
+
+    $bmw = Product::create([
+        'name' => 'BMW',
+        'sku' => 'BMW0001',
+        'url_key' => 'bmw0001',
+        'price' => 65000
+    ]);
+    
+To assign a category to a product us the `assignToCategory` method:
+
+    
+  
+In the above examples, `whereSku` and `find` both return an instance of `IrishTitan\Handshake\Core\Catalog\Product`. Please check out this class to get a better understanding of how things work.
+
 
 ## Usage
 

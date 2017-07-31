@@ -6,7 +6,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 class Module
 {
-
     /**
      * Register a new Magento 2 module.
      *
@@ -17,5 +16,4 @@ class Module
     {
         ComponentRegistrar::register(ComponentRegistrar::MODULE, $name, $dir);
     }
-
 }

@@ -3,7 +3,7 @@
 namespace IrishTitan\Handshake\Tests\Features;
 
 use IrishTitan\Handshake\Core\App;
-use IrishTitan\Handshake\Core\Session;
+use IrishTitan\Handshake\Core\Session\Session;
 use IrishTitan\Handshake\Tests\TestCase;
 
 class SessionTest extends TestCase

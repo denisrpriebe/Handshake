@@ -1,6 +1,6 @@
 <?php
 
-namespace IrishTitan\Handshake\Core;
+namespace IrishTitan\Handshake\Core\Authentication;
 
 use Magento\Customer\Model\Session as CustomerSession;
 

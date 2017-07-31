@@ -7,7 +7,6 @@ use SebastiaanLuca\StubGenerator\StubGenerator;
 
 class MakeModelCommand extends Command
 {
-
     /**
      * The command syntax.
      *
@@ -68,7 +67,7 @@ class MakeModelCommand extends Command
             ':MODEL:' => $model
         ]);
 
-        $this->output->writeln('<info>' . $model . ' model generated successfully.</info>');
+        $this->info($model . ' model generated successfully.');
     }
 
 }

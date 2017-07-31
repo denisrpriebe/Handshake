@@ -1,6 +1,6 @@
 <?php
 
-namespace IrishTitan\Handshake\Core;
+namespace IrishTitan\Handshake\Core\Security;
 
 use Magento\Framework\Registry as MagentoRegistry;
 

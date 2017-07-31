@@ -7,7 +7,6 @@ use SebastiaanLuca\StubGenerator\StubGenerator;
 
 class MakeMigrationCommand extends Command
 {
-
     /**
      * The command syntax.
      *
@@ -68,7 +67,7 @@ class MakeMigrationCommand extends Command
             ':MIGRATION:' => $migration
         ]);
 
-        $this->output->writeln($migration . ' migration created successfully.');
+        $this->info($migration . ' migration created successfully.');
     }
 
 }

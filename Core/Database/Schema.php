@@ -1,6 +1,6 @@
 <?php
 
-namespace IrishTitan\Handshake\Core;
+namespace IrishTitan\Handshake\Core\Database;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 

@@ -7,7 +7,6 @@ use SebastiaanLuca\StubGenerator\StubGenerator;
 
 class MakeSeederCommand extends Command
 {
-
     /**
      * The command syntax.
      *
@@ -68,7 +67,7 @@ class MakeSeederCommand extends Command
             ':SEEDER:' => $seeder
         ]);
 
-        $this->output->writeln('<info>' . $seeder . ' seeder created successfully.</info>');
+        $this->info($seeder . ' seeder created successfully.');
     }
 
 }

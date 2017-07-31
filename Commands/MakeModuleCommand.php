@@ -8,7 +8,6 @@ use SebastiaanLuca\StubGenerator\StubGenerator;
 
 class MakeModuleCommand extends Command
 {
-
     /**
      * The command syntax.
      *
@@ -54,7 +53,7 @@ class MakeModuleCommand extends Command
         $this->createDirectories($namespace, $name);
         $this->createFiles($namespace, $name);
 
-        $this->output->writeln('<info>Module scaffolding created successfully.</info>');
+        $this->info('Module scaffolding created successfully.');
     }
 
     /**
@@ -81,6 +80,9 @@ class MakeModuleCommand extends Command
         Directory::make('app/code/' . $namespace . '/' . $name . '/Controller/Adminhtml');
         Directory::make('app/code/' . $namespace . '/' . $name . '/Block');
         Directory::make('app/code/' . $namespace . '/' . $name . '/Block/Adminhtml');
+        Directory::make('app/code/' . $namespace . '/' . $name . '/Tests');
+        Directory::make('app/code/' . $namespace . '/' . $name . '/Tests/Unit');
+        Directory::make('app/code/' . $namespace . '/' . $name . '/Tests/Features');
     }
 
     /**
@@ -126,6 +128,15 @@ class MakeModuleCommand extends Command
         (new StubGenerator(
             __DIR__ . '/../Stubs/InstallSchema.stub',
             'app/code/' . $namespace . '/' . $name . '/Setup/InstallSchema.php'
+        ))->render([
+            ':MODULE:' => $name,
+            ':NAMESPACE:' => $namespace,
+        ]);
+
+        // Create TestCase.php
+        (new StubGenerator(
+            __DIR__ . '/../Stubs/TestCase.php.stub',
+            'app/code/' . $namespace . '/' . $name . '/Tests/TestCase.php'
         ))->render([
             ':MODULE:' => $name,
             ':NAMESPACE:' => $namespace,

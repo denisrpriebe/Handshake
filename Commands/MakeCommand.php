@@ -7,7 +7,6 @@ use SebastiaanLuca\StubGenerator\StubGenerator;
 
 class MakeCommand extends Command
 {
-
     /**
      * The command syntax.
      *
@@ -68,11 +67,11 @@ class MakeCommand extends Command
 
         $this->addCommandToDi($namespace, $module, $command);
 
-        $this->output->writeln('<info>' . $command . ' generated successfully.</info>');
+        $this->info($command . ' generated successfully.');
     }
 
     /**
-     * Add the command to the module's di.xml file.
+     * Add the command to the module's di . xml file .
      *
      * @param $namespace
      * @param $module
@@ -87,6 +86,7 @@ class MakeCommand extends Command
 
         $commandNode->addAttribute('name',
             str_replace('/', '_', strtolower($namespace . '/' . $module . '/Commands/' . $command)));
+        
         $commandNode->addAttribute('prefix:xsi:type', 'object');
 
         $xml->asXML('app/code/' . $namespace . '/' . $module . '/etc/di.xml');

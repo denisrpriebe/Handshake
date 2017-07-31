@@ -2,25 +2,17 @@
 
 namespace IrishTitan\Handshake\Setup;
 
-use Magento\Framework\Setup\InstallSchemaInterface;
-use Magento\Framework\Setup\ModuleContextInterface as Context;
-use Magento\Framework\Setup\SchemaSetupInterface as Setup;
+use IrishTitan\Handshake\Core\Database\MagentoSchemaInstaller;
+use IrishTitan\Handshake\Setup\Migrations\CreateMigrationsTable;
 
-class InstallSchema implements InstallSchemaInterface
+class InstallSchema extends MagentoSchemaInstaller
 {
-
     /**
-     * Run the migrations on 'setup:upgrade'.
+     * The migrations to run.
      *
-     * @param Setup $setup
-     * @param Context $context
+     * @var array
      */
-    public function install(Setup $setup, Context $context)
-    {
-        $setup->startSetup();
-
-
-
-        $setup->endSetup();
-    }
+    protected $migrations = [
+        CreateMigrationsTable::class
+    ];
 }

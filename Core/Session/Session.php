@@ -1,13 +1,12 @@
 <?php
 
-namespace IrishTitan\Handshake\Core;
+namespace IrishTitan\Handshake\Core\Session;
 
 use Magento\Customer\Model\Session as MagentoCustomerSession;
 use Magento\Framework\Session\SessionManager;
 
 class Session
 {
-
     /**
      * The magento 2 session instance.
      * Default is the customer session.

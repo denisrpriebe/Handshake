@@ -2,13 +2,11 @@
 
 namespace IrishTitan\Handshake\Commands;
 
-use Illuminate\Database\QueryException;
 use IrishTitan\Handshake\Core\Command;
-use IrishTitan\Handshake\Setup\Migrations\CreateAnimalsTable;
+use IrishTitan\Handshake\Facades\Directory;
 
 class MigrateCommand extends Command
 {
-
     /**
      * The command syntax.
      *
@@ -29,26 +27,14 @@ class MigrateCommand extends Command
      */
     public function handle()
     {
-        $this->output->writeln('Running migrations...');
+        $this->info('Running migrations...');
 
-        $migrations = include 'app/handshake/migrations.php';
+        $codeDirectory = Directory::app() . '/code';
+        $modules = Directory::directories($codeDirectory);
 
-        foreach ($migrations as $migration) {
+        var_dump($modules);
 
-            try {
-
-                $migration::migrate();
-                $this->output->writeln('<info>Migrating ' . $migration::name() . '...</info>');
-
-            } catch (QueryException $exception) {
-
-                $this->output->writeln('<question>' . $migration::name() . 'Migration already exists.</question>');
-
-            }
-
-        }
-
-        $this->output->writeln('Done.');
+        $this->info('Done.');
     }
 
 }

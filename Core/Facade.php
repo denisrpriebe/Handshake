@@ -4,7 +4,6 @@ namespace IrishTitan\Handshake\Core;
 
 abstract class Facade
 {
-
     /**
      * The class for the facade to represent.
      *
@@ -31,9 +30,6 @@ abstract class Facade
      */
     protected static function core()
     {
-        $instance = new static();
-
-        return App::make($instance->class);
+        return App::make((new static())->class);
     }
-
 }

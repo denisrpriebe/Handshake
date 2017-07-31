@@ -1,8 +1,8 @@
 <?php
 
-namespace IrishTitan\Handshake\Core\Entities;
+namespace IrishTitan\Handshake\Core\Sales;
 
-use IrishTitan\Handshake\Core\MagentoEntity;
+use IrishTitan\Handshake\Core\Catalog\MagentoEntity;
 use IrishTitan\Handshake\Exceptions\OrderNotFoundException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Model\OrderFactory;

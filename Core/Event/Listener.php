@@ -1,6 +1,6 @@
 <?php
 
-namespace IrishTitan\Handshake\Core;
+namespace IrishTitan\Handshake\Core\Event;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;

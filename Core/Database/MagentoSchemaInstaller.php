@@ -1,6 +1,6 @@
 <?php
 
-namespace IrishTitan\Handshake\Core;
+namespace IrishTitan\Handshake\Core\Database;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface as Context;
@@ -8,6 +8,12 @@ use Magento\Framework\Setup\SchemaSetupInterface as Setup;
 
 class MagentoSchemaInstaller implements InstallSchemaInterface
 {
+    /**
+     * The migrations to run.
+     *
+     * @var array
+     */
+    protected $migrations = [];
 
     /**
      * Run the migrations on 'setup:upgrade'.
@@ -31,6 +37,8 @@ class MagentoSchemaInstaller implements InstallSchemaInterface
      */
     protected function run()
     {
-
+        foreach ($this->migrations as $migration) {
+            $migration::install();
+        }
     }
 }

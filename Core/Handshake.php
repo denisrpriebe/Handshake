@@ -3,11 +3,11 @@
 namespace IrishTitan\Handshake\Core;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use IrishTitan\Handshake\Core\Security\Registry;
 use IrishTitan\Handshake\Facades\Directory;
 
 class Handshake
 {
-
     /**
      * Handshake constructor.
      *
@@ -56,7 +56,7 @@ class Handshake
      *
      * @return mixed
      */
-    private function config()
+    protected function config()
     {
         return include Directory::app() . '/etc/env.php';
     }
@@ -66,7 +66,7 @@ class Handshake
      *
      * @return void
      */
-    private function setConfig()
+    protected function setConfig()
     {
         $config = $this->config();
 
@@ -80,7 +80,7 @@ class Handshake
      *
      * @return void
      */
-    private function bootEloquent()
+    protected function bootEloquent()
     {
         $capsule = new Capsule();
 

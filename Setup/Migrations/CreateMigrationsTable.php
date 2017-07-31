@@ -3,22 +3,21 @@
 namespace IrishTitan\Handshake\Setup\Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
-use IrishTitan\Handshake\Contracts\MigrationContract;
-use IrishTitan\Handshake\Core\Migration;
+use IrishTitan\Handshake\Core\Database\Migration;
 use IrishTitan\Handshake\Core\Schema;
 
-class CreateAnimalsTable extends Migration implements MigrationContract
+class CreateMigrationsTable extends Migration
 {
-
     /**
      * Run the migration.
      *
+     * @return void
      */
     public function up()
     {
-        Schema::create('animals', function (Blueprint $table) {
+        Schema::create('handshake_migrations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('migration');
             $table->timestamps();
         });
     }
@@ -26,10 +25,11 @@ class CreateAnimalsTable extends Migration implements MigrationContract
     /**
      * Reverse the migration.
      *
+     * @return void
      */
     public function down()
     {
-        Schema::drop('animals');
+        Schema::drop('handshake_migrations');
     }
 
 }

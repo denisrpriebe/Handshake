@@ -1,14 +1,16 @@
 <?php
 
-namespace IrishTitan\Handshake\Core;
+namespace IrishTitan\Handshake\Core\Database;
 
+use IrishTitan\Handshake\Core\Handshake;
 use ReflectionClass;
 
-class Migration
+class Seeder
 {
 
     /**
-     * Migration constructor.
+     * Seeder constructor.
+     *
      */
     public function __construct()
     {
@@ -26,23 +28,12 @@ class Migration
     }
 
     /**
-     * Run the migration.
+     * Run the database seed.
      *
-     * @return void
      */
-    public static function migrate()
+    public static function seed()
     {
-        (new static)->up();
+        $seeder = new static;
+        $seeder->run();
     }
-
-    /**
-     * Run the inverse of the migration.
-     *
-     * @return void
-     */
-    public static function reverse()
-    {
-        (new static)->down();
-    }
-
 }

@@ -60,11 +60,29 @@ class Directory
     }
 
     /**
+     * Get all directories in the given directories.
+     *
+     * @param $directory
+     * @return \Illuminate\Support\Collection
+     */
+    public function directories($directory)
+    {
+        $directories = collect();
+
+        foreach (glob($directory . "*") as $file) {
+            is_dir($file) ?: $directories->push($file);
+        }
+
+        return $directories;
+    }
+
+    /**
      * Get the path to the app directory.
      *
      * @return mixed
      */
-    public function app()
+    public
+    function app()
     {
         return $this->directoryList->getPath('app');
     }

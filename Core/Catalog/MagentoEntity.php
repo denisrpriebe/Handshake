@@ -1,8 +1,10 @@
 <?php
 
-namespace IrishTitan\Handshake\Core;
+namespace IrishTitan\Handshake\Core\Catalog;
 
 use Faker\Factory;
+use IrishTitan\Handshake\Core\App;
+use IrishTitan\Handshake\Core\Handshake;
 
 abstract class MagentoEntity
 {
