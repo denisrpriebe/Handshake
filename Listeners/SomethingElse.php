@@ -2,7 +2,7 @@
 
 namespace IrishTitan\Handshake\Listeners;
 
-use IrishTitan\Handshake\Core\Listener;
+use IrishTitan\Handshake\Core\Event\Listener;
 
 class SomethingElse extends Listener
 {

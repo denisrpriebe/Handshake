@@ -22,13 +22,13 @@ If everything went smoothly, you are now ready to begin developing Magento 2 mod
 
 ## Products
 
-When working with Magento 2 products, you may use the `IrishTitan\Handshake\Facades\Product` facade to perform a number of different actions. For example:
+Previously, when you worked with Magento 2 products you probably needed to use the `ProductFactory`, `ProductRepository`, `ProductCollection` and whatever else to accomplish what you wanted to do. This is no longer the case. Instead you may use the `IrishTitan\Handshake\Facades\Product` facade to perform a number of different actions. For example:
 
-To find a product by it's ID use the `find` method:
+To find a product by its ID use the `find` method:
 
     $product = Product::find(23);
     
-To find a product by it's SKU use the `whereSku` method:
+To find a product by its SKU use the `whereSku` method:
 
     $product = Product::whereSku('PROD0001');
     
@@ -39,6 +39,7 @@ To get all products in the Magento 2 catalog use the `all` method:
 To add an image to a product use the `addImage` method:
 
     $product = Product::find(123);
+     
     $product->addImage('path/to/first/image.jpg');
     $product->addImage('path/to/second/image.jpg');
     
@@ -67,12 +68,70 @@ To create a new product you may use the `create` method:
         'price' => 65000
     ]);
     
-To assign a category to a product us the `assignToCategory` method:
+To assign a product to a category us the `assignToCategory` method:
 
+    $category = Category::find(2);
+    $product = Product::find(13);
+     
+    $product->assignToCategory($category);
     
   
 In the above examples, `whereSku` and `find` both return an instance of `IrishTitan\Handshake\Core\Catalog\Product`. Please check out this class to get a better understanding of how things work.
 
+## Categories
+
+Previously, when you worked with Magento 2 categories you probably needed to use the `CategoryFactory`, `CategoryRepository`, `CategoryCollection` and whatever else to accomplish what you wanted to do. This is no longer the case. Instead you may use the `IrishTitan\Handshake\Facades\Category` facade to perform a number of different actions. For example:
+
+To find a category by its ID use the `find` method:
+
+    $category = Category::find(12);
+    
+The `find` method will return an instance of `IrishTitan\Handshake\Core\Catalog\Category` if found and `null` if the category is not found. You may also use `findOrFail($id)` method to have an error thrown if the category is not found.
+
+To find a category by its URL key use the `whereUrlKey` method:
+
+    $category = Category::whereUrlKey('shoes');
+    
+To find a category by its name use the `whereName` method:
+
+    $category = Category::whereName('Shoes');
+    
+If more than one category have the same name, the first will be returned.
+
+To get all categories use the `all` method:
+
+    $categories = Category::all();
+    
+To assign a product to a category use the `addProduct` method:
+
+    $nike = Product::whereSku('NIKE0001');
+     
+    $category = Category::whereUrlKey('shoes');
+    $category->addProduct($nike);
+
+If you need to have nested categories you may use the `setParent` method:
+
+    $cars = Category::whereUrlKey('cars');
+    $bmws = Category::whereUrlKey('bmws');
+     
+    $bmws->setParent($cars);
+    $bmws->save();
+
+The above are just a handful of methods that you may use. Please checkout the `IrishTitan\Handshake\Core\Catalog\Category` class to see the other available methods.
+
+## CLI Commands
+
+When writing custom functionality for Magento 2 such as an ERP integration or a custom script, it is generally easier to do this as a CLI command. Magento 2 has a command class which you may inherit from but it is still rather tedious to write your own custom commands. Instead you may use the Handshake command class. Before you use the below commands, make sure you module has a `Commands` directory. Ofcourse if you created a module using Handshake's `handshake:make:module` command, this directory will already be present.
+
+To create a new command, here is the syntax to use:
+
+    php bin/magento handshake:make:command Namespace Module CommandName
+    
+As an example, you may do something like:
+
+    php bin/magento handshake:make:command Acme Forum ImportThreadsCommmand
+    
+This will create a `ImportThreadsCommmand.php` file in `app/code/Acme/Forum/Commands`.
 
 ## Usage
 

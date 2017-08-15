@@ -3,7 +3,7 @@
 namespace IrishTitan\Handshake\Core\Entities;
 
 use Illuminate\Support\Collection;
-use IrishTitan\Handshake\Core\MagentoEntity;
+use IrishTitan\Handshake\Core\Catalog\MagentoEntity;
 use IrishTitan\Handshake\Exceptions\CategoryNotFoundException;
 use Magento\Catalog\Model\CategoryFactory;
 use Magento\Catalog\Model\CategoryRepository;
