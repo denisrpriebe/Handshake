@@ -27,55 +27,64 @@ If everything went smoothly, you are now ready to begin developing Magento 2 mod
 Previously, when you worked with Magento 2 products you probably needed to use the `ProductFactory`, `ProductRepository`, `ProductCollection` and whatever else to accomplish what you wanted to do. This is no longer the case. Instead you may use the `IrishTitan\Handshake\Facades\Product` facade to perform a number of different actions. For example:
 
 To find a product by its ID use the `find` method:
-
-    $product = Product::find(23);
+```php
+$product = Product::find(23);
+```
     
 To find a product by its SKU use the `whereSku` method:
-
-    $product = Product::whereSku('PROD0001');
+```php
+$product = Product::whereSku('PROD0001');
+```
     
 To get all products in the Magento 2 catalog use the `all` method:
-
-    $products = Product::all();
+```php
+$products = Product::all();
+```
     
 To add an image to a product use the `addImage` method:
+```php
+$product = Product::find(123);
 
-    $product = Product::find(123);
-     
-    $product->addImage('path/to/first/image.jpg');
-    $product->addImage('path/to/second/image.jpg');
+$product->addImage('path/to/first/image.jpg');
+$product->addImage('path/to/second/image.jpg');
+```
     
 Alternatively, you may also do this as all Handshake methods are chain-able:
-
-    Product::find(123)
-        ->addImage('path/to/first/image.jpg')
-        ->addImage('path/to/second/image.jpg');
+```php
+Product::find(123)
+    ->addImage('path/to/first/image.jpg')
+    ->addImage('path/to/second/image.jpg');
+```
     
 To get an array of all the images a product has use the `images` method:
-
-    $product = Product::whereSku('PROD0002');
-    $images = $product->images();
+```php
+$product = Product::whereSku('PROD0002');
+$images = $product->images();
+```
     
 To get all the categories a products is in use the `categories` method:
-
-    $product = Product::find(487);
-    $categories = $product->categories();
+```php
+$product = Product::find(487);
+$categories = $product->categories();
+```
     
 To create a new product you may use the `create` method:
-
-    $bmw = Product::create([
-        'name' => 'BMW',
-        'sku' => 'BMW0001',
-        'url_key' => 'bmw0001',
-        'price' => 65000
-    ]);
+```php
+$bmw = Product::create([
+    'name' => 'BMW',
+    'sku' => 'BMW0001',
+    'url_key' => 'bmw0001',
+    'price' => 65000
+]);
+```
     
 To assign a product to a category us the `assignToCategory` method:
+```php
+$category = Category::find(2);
+$product = Product::find(13);
 
-    $category = Category::find(2);
-    $product = Product::find(13);
-     
-    $product->assignToCategory($category);
+$product->assignToCategory($category);
+```
     
   
 In the above examples, `whereSku` and `find` both return an instance of `IrishTitan\Handshake\Core\Catalog\Product`. Please check out this class to get a better understanding of how things work.
@@ -85,39 +94,44 @@ In the above examples, `whereSku` and `find` both return an instance of `IrishTi
 Previously, when you worked with Magento 2 categories you probably needed to use the `CategoryFactory`, `CategoryRepository`, `CategoryCollection` and whatever else to accomplish what you wanted to do. This is no longer the case. Instead you may use the `IrishTitan\Handshake\Facades\Category` facade to perform a number of different actions. For example:
 
 To find a category by its ID use the `find` method:
-
-    $category = Category::find(12);
+```php
+$category = Category::find(12);
+```
     
 The `find` method will return an instance of `IrishTitan\Handshake\Core\Catalog\Category` if found and `null` if the category is not found. You may also use `findOrFail($id)` method to have an error thrown if the category is not found.
 
 To find a category by its URL key use the `whereUrlKey` method:
-
-    $category = Category::whereUrlKey('shoes');
+```php
+$category = Category::whereUrlKey('shoes');
+```
     
 To find a category by its name use the `whereName` method:
-
-    $category = Category::whereName('Shoes');
-    
+```php
+$category = Category::whereName('Shoes');
+```
 If more than one category have the same name, the first will be returned.
 
 To get all categories use the `all` method:
-
-    $categories = Category::all();
+```php
+$categories = Category::all();
+```
     
 To assign a product to a category use the `addProduct` method:
+```php
+$nike = Product::whereSku('NIKE0001');
 
-    $nike = Product::whereSku('NIKE0001');
-     
-    $category = Category::whereUrlKey('shoes');
-    $category->addProduct($nike);
+$category = Category::whereUrlKey('shoes');
+$category->addProduct($nike);
+```
 
 If you need to have nested categories you may use the `setParent` method:
+```php
+$cars = Category::whereUrlKey('cars');
+$bmws = Category::whereUrlKey('bmws');
 
-    $cars = Category::whereUrlKey('cars');
-    $bmws = Category::whereUrlKey('bmws');
-     
-    $bmws->setParent($cars);
-    $bmws->save();
+$bmws->setParent($cars);
+$bmws->save();
+```
 
 The above are just a handful of methods that you may use. Please checkout the `IrishTitan\Handshake\Core\Catalog\Category` class to see the other available methods.
 
