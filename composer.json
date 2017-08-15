@@ -1,9 +1,10 @@
 {
   "name": "irishtitan/handshake",
-  "description": "Make the Magento 2 development process easier.",
+  "description": "A Laravel style wrapper around Magento 2.",
   "license": "MIT",
   "keywords": [
-    "magento"
+    "magento",
+    "laravel"
   ],
   "type": "magento2-module",
   "require": {

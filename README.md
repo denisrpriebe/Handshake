@@ -4,6 +4,8 @@
 
 Handshake is a Magento 2 module that is designed to make the Magento 2 module development experience easier and more elegant. It does this by replacing the default Magento 2 ORM system with Laravel's Eloquent Library. Any custom Magento 2 module you build using Handshake can use Laravel style Migrations, Seeders, Models, Sessions and more with corresponding commands.
 
+Handshake has been tested with Magento versions 2.1.5 - 2.1.8.
+
 ## Installation
 
 Before you install Handshake, make sure you have a working copy of Magento 2. Also make sure that Magento 2 is properly configured as Handshake will try and use Magento 2's database configuration to run your migrations, seeds, etc.
@@ -21,6 +23,20 @@ Finish the installation by running:
     php bin/magento setup:upgrade
     
 If everything went smoothly, you are now ready to begin developing Magento 2 modules with Handshake.
+
+## Object Manager
+
+Should we use the object manager? I don't think anyone really knows. Regardless, automatic constructor injection is what Magento recommends. There are however cases where you will need to use the object manager. Instead, do it in a more elegant way using the `IrishTitan\Handshake\Core\App` class.
+
+```php
+
+use Magento\Catalog\Model\ProductFactory;
+use IrishTitan\Handshake\Core\App;
+ 
+$productFactory = App::make(ProductFactory::class);
+
+```
+You may also use `App::get()` to get an instance of the given class if it has already been instantiated.
 
 ## Products
 
@@ -137,7 +153,7 @@ The above are just a handful of methods that you may use. Please checkout the `I
 
 ## CLI Commands
 
-When writing custom functionality for Magento 2 such as an ERP integration or a custom script, it is generally easier to do this as a CLI command. Magento 2 has a command class which you may inherit from but it is still rather tedious to write your own custom commands. Instead you may use the Handshake command class. Before you use the below commands, make sure you module has a `Commands` directory. Ofcourse if you created a module using Handshake's `handshake:make:module` command, this directory will already be present.
+When writing custom functionality for Magento 2 such as an ERP integration or a custom script, it is generally easier to do this as a CLI command. Magento 2 has a command class which you may inherit from but it is still rather tedious to write your own custom commands. Instead you may use the Handshake command class. Before you use the below commands, make sure you module has a `Commands` directory. Of course if you created a module using Handshake's `handshake:make:module` command, this directory will already be present.
 
 To create a new command, here is the syntax to use:
 
@@ -147,17 +163,49 @@ As an example, you may do something like:
 
     php bin/magento handshake:make:command Acme Forum ImportThreadsCommmand
     
-This will create a `ImportThreadsCommmand.php` file in `app/code/Acme/Forum/Commands`.
+This will create a `ImportThreadsCommmand.php` file in `app/code/Acme/Forum/Commands`. Your command will also be automatically registered in the `etc/di.xml` file as all Magento 2 commands are required to be registered here. You may need to run `php bin/magento cache:clean` in order for your command to show up the command list.
 
-## Usage
+##### Command Syntax
 
-To see a list of Handshake commands run:
+If for example you want to be able to run:
 
-    php bin/magento
+    php bin/magento forum:threads:import
     
-Scroll through the list until you see the Handshake section.
+you will need to update the command signature property in your command file.
 
-### Creating a New Module
+```php
+/**
+ * The command syntax.
+ *
+ * @var string
+ */
+protected $signature = 'forum:threads:import';
+```
+##### Command Arguments
+
+If you need for you command to accept arguments such as this:
+
+    php bin/magento forum:threads:import MagentoThreads
+
+You may define your arguments in the `arguments` property in your command class:
+
+```php
+/**
+ * The arguments the command accepts.
+ *
+ * @var array
+ */
+protected $arguments = [
+ 
+    'thread' => [
+        'mode' => 'required',
+        'description' => 'The thread name to import.'
+    ]
+ 
+];
+```
+
+## Creating a New Module
 
 To create a new Magento 2 module, you can use the `handshake:make:module` command:
 
@@ -165,7 +213,7 @@ To create a new Magento 2 module, you can use the `handshake:make:module` comman
      
 The `handshake:make:module` command accepts two arguments. `Namespace` is your vendor name and `Module` is the name of your module.
 
-For example, `php bin/magento handshake:make:module Acme Forum`.
+For example, `php bin/magento handshake:make:module Acme Forum`. This will create a new module in `app/code/Acme/Forum`.
 
 ### Migrations
 
