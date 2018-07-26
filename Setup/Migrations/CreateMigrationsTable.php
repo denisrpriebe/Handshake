@@ -4,7 +4,7 @@ namespace IrishTitan\Handshake\Setup\Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
 use IrishTitan\Handshake\Core\Database\Migration;
-use IrishTitan\Handshake\Core\Schema;
+use IrishTitan\Handshake\Core\Database\Schema;
 
 class CreateMigrationsTable extends Migration
 {
