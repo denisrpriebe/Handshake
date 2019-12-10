@@ -2,6 +2,8 @@
 
 [![Latest Stable Version](https://poser.pugx.org/irishtitan/handshake/version)](https://packagist.org/packages/irishtitan/handshake) [![GitHub issues](https://img.shields.io/github/issues/denisrpriebe/Handshake.svg)](https://github.com/denisrpriebe/Handshake/issues) [![GitHub forks](https://img.shields.io/github/forks/denisrpriebe/Handshake.svg)](https://github.com/denisrpriebe/Handshake/network) [![GitHub stars](https://img.shields.io/github/stars/denisrpriebe/Handshake.svg)](https://github.com/denisrpriebe/Handshake/stargazers)  [![Total Downloads](https://poser.pugx.org/irishtitan/handshake/downloads)](https://packagist.org/packages/irishtitan/handshake) [![License](https://poser.pugx.org/irishtitan/handshake/license)](https://packagist.org/packages/irishtitan/handshake) [![Twitter](https://img.shields.io/twitter/url/https/github.com/denisrpriebe/Handshake.svg?style=social)](https://twitter.com/intent/tweet?text=Yo,%20checkout%20this%20Magento%202%20%20module%20called%20Handshake:&url=%5Bobject%20Object%5D)
 
+_I am not actively maintaining this package anymore. If you need to use it, feel free to fork it or contribute a pull request._
+
 Handshake is a Magento 2 module that is designed to make the Magento 2 module development experience easier and more elegant. It does this by replacing the default Magento 2 ORM system with Laravel's Eloquent Library. Any custom Magento 2 module you build using Handshake can use Laravel style Migrations, Seeders, Models, Sessions and more with corresponding commands.
 
 Handshake has been tested with Magento versions 2.1.5 - 2.1.8.
